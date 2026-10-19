@@ -54,16 +54,62 @@ const projects = [
   },
 ];
 
+// Split text into individually animated characters.
+// Spaces remain spaces, so the original text layout is preserved.
+function splitIntoLetters(text) {
+  return Array.from(text).map((character, index) => (
+    <span
+      className={
+        character === " "
+          ? "projects-heading-space"
+          : "projects-heading-letter"
+      }
+      key={`${character}-${index}`}
+      aria-hidden="true"
+    >
+      {character === " " ? "\u00A0" : character}
+    </span>
+  ));
+}
+
 export default function ProjectsSection() {
   const containerRef = useRef(null);
+  const headingRef = useRef(null);
 
   useEffect(() => {
     const container = containerRef.current;
+    const heading = headingRef.current;
 
-    if (!container) return;
+    if (!container || !heading) return;
 
     const mm = gsap.matchMedia();
 
+    // Letter-by-letter heading animation.
+    const headingLetters = heading.querySelectorAll(
+      ".projects-heading-letter"
+    );
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.set(headingLetters, {
+        yPercent: 110,
+        autoAlpha: 0,
+      });
+
+      gsap.to(headingLetters, {
+        yPercent: 0,
+        autoAlpha: 1,
+        duration: 0.7,
+        stagger: 0.035,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: heading,
+          start: "top 85%",
+          once: true,
+        },
+      });
+    });
+
+    // Keep the existing stacked-card scroll animation on desktop.
     mm.add("(min-width: 768px)", () => {
       const cards = gsap.utils.toArray(
         container.querySelectorAll(".project-scroll-card")
@@ -115,11 +161,11 @@ export default function ProjectsSection() {
 
         {/* Main heading */}
         <div className="projects-heading">
-          <p className="projects-eyebrow">IDEAS INTO REALITY</p>
-
-          <h2>
-            Selected Projects
-            <span> .</span>
+          <h2 ref={headingRef} aria-label="Selected Projects.">
+            <span className="projects-heading-text">
+              {splitIntoLetters("Selected Projects")}
+            </span>
+            <span className="projects-title-period">.</span>
           </h2>
 
           <p className="projects-intro">
@@ -138,6 +184,7 @@ export default function ProjectsSection() {
               key={project.number}
               className="project-scroll-card"
             >
+              {/* Left side labels */}
               <div className="project-side-label project-side-label-left">
                 <span>SELECTED</span>
                 <span>PROJECTS</span>
@@ -166,36 +213,59 @@ export default function ProjectsSection() {
 
                 {/* Project details */}
                 <div className="project-card-content">
-                  <div className="project-card-topline">
-                    <span>{project.category}</span>
-                    <span>{project.year}</span>
-                  </div>
-
                   <div className="project-card-main">
-                    <p className="project-kicker">
-                      PROJECT {project.number}
-                    </p>
-
                     <h3>{project.title}</h3>
 
                     <p className="project-description">
                       {project.description}
                     </p>
+
+                    <div className="project-metadata">
+                      <div className="project-meta-row">
+                        <span className="project-meta-label">
+                          Year:
+                        </span>
+                        <span className="project-meta-value">
+                          {project.year}
+                        </span>
+                      </div>
+
+                      <div className="project-meta-row">
+                        <span className="project-meta-label">
+                          Category:
+                        </span>
+                        <span className="project-meta-value">
+                          {project.category}
+                        </span>
+                      </div>
+                    </div>
                   </div>
 
+                  {/* Button and project number */}
                   <div className="project-card-bottom">
-                    <span className="project-status text-white">
-                      {/* <span className="project-status-dot" /> */}
-                      TAKE A CLOSER LOOK
-                    </span>
+                    <a
+                      href="#contact"
+                      className="project-view-button"
+                      aria-label={`View ${project.title} project`}
+                    >
+                      <span>VIEW PROJECT</span>
 
-                    <span className="project-arrow" aria-hidden="true">
-                      <i className="fa-solid fa-arrow-right" />
+                      <span
+                        className="project-view-arrow"
+                        aria-hidden="true"
+                      >
+                        <i className="fa-solid fa-arrow-right" />
+                      </span>
+                    </a>
+
+                    <span className="project-large-number">
+                      {project.number}
                     </span>
                   </div>
                 </div>
               </div>
 
+              {/* Right side labels */}
               <div className="project-side-label project-side-label-right">
                 <span>CREATIVE</span>
                 <span>DEVELOPMENT</span>

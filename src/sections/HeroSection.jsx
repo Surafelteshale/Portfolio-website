@@ -9,8 +9,6 @@ import {
   FaCircle,
 } from "react-icons/fa";
 
-import AnimatedText from "../components/AnimatedText";
-
 export default function HeroSection() {
   const heroRef = useRef(null);
 
@@ -26,67 +24,76 @@ export default function HeroSection() {
         },
       });
 
-      // Animate the eyebrow.
-      timeline.fromTo(
-        "[data-hero-animate='eyebrow']",
-        {
-          autoAlpha: 0,
-          y: 25,
-        },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.7,
-        }
-      );
-
-      // Animate the role image and description.
-      timeline.fromTo(
-        "[data-hero-animate='note']",
-        {
-          autoAlpha: 0,
-          y: 25,
-          scale: 0.96,
-        },
-        {
-          autoAlpha: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-        },
-        "-=0.35"
-      );
-
-      // Animate the section indicator.
-      timeline.fromTo(
-        "[data-hero-animate='indicator']",
-        {
-          autoAlpha: 0,
-          y: 20,
-        },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.6,
-        },
-        "-=0.3"
-      );
-
-      // Animate social links, button, and introduction.
-      timeline.fromTo(
-        "[data-hero-animate='bottom']",
-        {
-          autoAlpha: 0,
-          y: 30,
-        },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.75,
-          stagger: 0.12,
-        },
-        "-=0.2"
-      );
+      // Animate the hero text and elements upward into view.
+      timeline
+        .fromTo(
+          "[data-hero-animate='eyebrow']",
+          {
+            autoAlpha: 0,
+            y: 25,
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.7,
+          }
+        )
+        .fromTo(
+          "[data-hero-animate='title']",
+          {
+            autoAlpha: 0,
+            y: 65,
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.15,
+          },
+          "-=0.35"
+        )
+        .fromTo(
+          "[data-hero-animate='note']",
+          {
+            autoAlpha: 0,
+            y: 25,
+            scale: 0.96,
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+          },
+          "-=0.55"
+        )
+        .fromTo(
+          "[data-hero-animate='indicator']",
+          {
+            autoAlpha: 0,
+            y: 20,
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.6,
+          },
+          "-=0.3"
+        )
+        .fromTo(
+          "[data-hero-animate='bottom']",
+          {
+            autoAlpha: 0,
+            y: 30,
+          },
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.75,
+            stagger: 0.12,
+          },
+          "-=0.2"
+        );
     }, hero);
 
     return () => ctx.revert();
@@ -103,7 +110,6 @@ export default function HeroSection() {
         className="portfolio-hero-background"
         aria-hidden="true"
       />
-
       <div
         className="portfolio-hero-overlay"
         aria-hidden="true"
@@ -114,42 +120,30 @@ export default function HeroSection() {
           <div className="col-lg-12">
             <div className="banner-content">
               <div className="content-head mb-5 d-flex flex-md-nowrap flex-wrap align-items-center justify-content-between gap-4">
-                {/* Main heading and eyebrow */}
+                {/* Main heading */}
                 <div>
                   <div
                     className="hero-sub mb-3 fs-32px heading-font text-white"
                     data-hero-animate="eyebrow"
                   >
                     Software, Design &amp;
-
                     <span className="d-flex flex-wrap fs-32px heading-font text-white align-items-center gap-2">
                       Digital Experiences
                     </span>
                   </div>
 
-                  {/* Letter-by-letter animated hero title */}
                   <h1 className="h-title pt-2 white fw_700">
-                    <AnimatedText
-                      as="span"
-                      text="BUILDING"
-                      className="hero-animated-title"
-                      start="top 95%"
-                      stagger={0.035}
-                      duration={0.8}
-                    />
+                    <span data-hero-animate="title">
+                      BUILDING
+                    </span>
 
-                    <AnimatedText
-                      as="span"
-                      text="DIGITAL FUTURES"
-                      className="hero-animated-title hero-animated-title-second"
-                      start="top 95%"
-                      delay={0.15}
-                      stagger={0.035}
-                      duration={0.8}
+                    <span
+                      className="d-flex align-items-center flex-wrap"
+                      data-hero-animate="title"
                     >
-                    </AnimatedText>
-
-                    <span className="portfolio-period">.</span>
+                      DIGITAL FUTURES
+                      <span className="portfolio-period">.</span>
+                    </span>
                   </h1>
                 </div>
 
@@ -189,7 +183,10 @@ export default function HeroSection() {
                 <div className="line w-100" />
 
                 <div className="d-flex text-nowrap align-items-center gap-2 text-uppercase text-white fs--18px">
-                  <FaCircle size={7} aria-hidden="true" />
+                  <FaCircle
+                    size={7}
+                    aria-hidden="true"
+                  />
                   WHAT I DO
                 </div>
               </div>

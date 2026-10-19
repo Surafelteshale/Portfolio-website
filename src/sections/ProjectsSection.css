@@ -2,6 +2,7 @@
 /* =========================================
    PROJECT SHOWCASE
 ========================================= */
+
 .projects-showcase {
   position: relative;
   overflow: clip;
@@ -15,8 +16,9 @@
 }
 
 /* =========================================
-   PROJECT HEADING
+   PROJECT SECTION HEADING
 ========================================= */
+
 .projects-heading {
   max-width: 900px;
   margin: 0 auto 100px;
@@ -34,8 +36,44 @@
   text-transform: uppercase;
 }
 
-.projects-heading h2 span {
-  color: #F16530;
+/*
+  The text wrapper inherits the h2 typography.
+  It does not define a new font size or font weight.
+*/
+
+.projects-heading-text {
+  display: inline;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+
+/* Each letter keeps the original heading typography. */
+
+.projects-heading-letter {
+  display: inline-block;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  will-change: transform, opacity;
+}
+
+/* Preserve spaces between words. */
+
+.projects-heading-space {
+  display: inline;
+  white-space: pre;
+}
+
+/* Only the final period is orange. */
+
+.projects-heading h2 > .projects-title-period {
+  display: inline;
+  color: #f16530;
+  font: inherit;
+  letter-spacing: inherit;
 }
 
 .projects-intro {
@@ -49,6 +87,7 @@
 /* =========================================
    PROJECT CARDS / SCROLL STACK
 ========================================= */
+
 .project-floating-wrap {
   position: relative;
   isolation: isolate;
@@ -66,8 +105,8 @@
   padding: 26px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 5px;
-  background: #0a0a0a;
+  border-radius: 8px;
+  background: #050a0e;
   transform-origin: center top;
   will-change: transform;
 }
@@ -98,6 +137,7 @@
 /* =========================================
    CARD INNER LAYOUT
 ========================================= */
+
 .project-card-inner {
   display: grid;
   grid-template-columns: 1.08fr 0.92fr;
@@ -105,8 +145,12 @@
   min-height: 430px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: #101010;
+  background: #050a0e;
 }
+
+/* =========================================
+   PROJECT IMAGE
+========================================= */
 
 .project-image-wrap {
   position: relative;
@@ -169,111 +213,141 @@
 /* =========================================
    PROJECT DETAILS
 ========================================= */
+
 .project-card-content {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-width: 0;
-  padding: clamp(22px, 3vw, 40px);
-}
-
-.project-card-topline {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.48);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  padding: clamp(22px, 3vw, 38px);
 }
 
 .project-card-main {
-  padding: 38px 0;
-}
-
-.project-kicker {
-  margin-bottom: 16px;
-  color: #F16530;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  padding: 0;
 }
 
 .project-card-main h3 {
-  margin: 0 0 20px;
+  margin: 0 0 16px;
   color: #f6f4ef;
-  font-size: clamp(25px, 2.6vw, 38px);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.045em;
+  font-size: clamp(26px, 2.5vw, 38px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
   overflow-wrap: anywhere;
 }
 
 .project-description {
-  max-width: 360px;
+  max-width: 440px;
   margin: 0;
-  color: rgba(255, 255, 255, 0.55);
-  font-size: 13px;
-  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: clamp(13px, 1.15vw, 16px);
+  line-height: 1.75;
 }
+
+.project-metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.project-meta-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.project-meta-label {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: clamp(14px, 1.3vw, 19px);
+  font-weight: 400;
+}
+
+.project-meta-value {
+  color: #fff;
+  font-size: clamp(16px, 1.5vw, 22px);
+  font-weight: 750;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================
+   PROJECT BUTTON AND NUMBER
+========================================= */
 
 .project-card-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  gap: 14px;
+  margin-top: 30px;
 }
 
-.project-status {
+.project-view-button {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  color: rgba(255, 255, 255, 0.45);
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 54px;
+  padding: 5px 6px 5px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: #191e23;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
 }
 
-.project-status-dot {
-  width: 6px;
-  height: 6px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: #F16530;
+.project-view-button:hover {
+  background: #252b30;
+  color: #fff;
 }
 
-.project-arrow {
+.project-view-arrow {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  color: #f6f4ef;
+  background: #f16530;
+  color: #fff;
   transition:
-    color 0.25s ease,
-    background 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.25s ease;
+    transform 0.3s ease,
+    background 0.3s ease;
 }
 
-.project-scroll-card:hover .project-arrow {
-  transform: rotate(-45deg);
-  border-color: #F16530;
-  background: #F16530;
-  color: #050505;
+.project-view-button:hover .project-view-arrow {
+  transform: translateX(2px);
+  background: #ff7846;
+}
+
+.project-large-number {
+  flex-shrink: 0;
+  color: #fff;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.project-view-button:focus-visible {
+  outline: 2px solid #f16530;
+  outline-offset: 4px;
 }
 
 /* =========================================
    PROJECT FOOTER
 ========================================= */
+
 .projects-footer {
   display: flex;
   justify-content: space-between;
@@ -290,6 +364,7 @@
 /* =========================================
    TABLET
 ========================================= */
+
 @media (max-width: 991px) {
   .project-scroll-card {
     grid-template-columns: minmax(0, 1fr);
@@ -310,13 +385,26 @@
   }
 
   .project-card-content {
-    padding: 24px;
+    padding: 26px;
+  }
+
+  .project-card-main h3 {
+    font-size: clamp(27px, 4vw, 38px);
+  }
+
+  .project-description {
+    font-size: 15px;
+  }
+
+  .project-metadata {
+    margin-top: 24px;
   }
 }
 
 /* =========================================
    MOBILE
 ========================================= */
+
 @media (max-width: 767px) {
   .projects-heading {
     margin-bottom: 45px;
@@ -338,7 +426,7 @@
   .project-scroll-card {
     margin-bottom: 18px;
     padding: 10px;
-    border-radius: 4px;
+    border-radius: 6px;
   }
 
   .project-card-inner {
@@ -356,19 +444,65 @@
   }
 
   .project-card-content {
-    padding: 22px 18px;
-  }
-
-  .project-card-main {
-    padding: 28px 0;
+    padding: 24px 18px;
   }
 
   .project-card-main h3 {
-    font-size: 29px;
+    margin-bottom: 14px;
+    font-size: clamp(27px, 7.5vw, 36px);
+    line-height: 1.08;
   }
 
   .project-description {
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .project-metadata {
+    gap: 14px;
+    margin-top: 25px;
+  }
+
+  .project-meta-label {
+    font-size: 15px;
+  }
+
+  .project-meta-value {
+    font-size: 17px;
+  }
+
+  .project-card-bottom {
+    margin-top: 26px;
+  }
+
+  .project-view-button {
+    min-height: 48px;
+    gap: 10px;
+    padding-left: 16px;
+    font-size: 11px;
+  }
+
+  .project-view-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .project-large-number {
+    font-size: 36px;
+  }
+
+  .project-type,
+  .project-image-number {
+    bottom: 16px;
+    font-size: 9px;
+  }
+
+  .project-type {
+    left: 16px;
+  }
+
+  .project-image-number {
+    right: 16px;
   }
 
   .projects-footer {
@@ -381,9 +515,10 @@
 /* =========================================
    REDUCED MOTION ACCESSIBILITY
 ========================================= */
+
 @media (prefers-reduced-motion: reduce) {
   .project-image,
-  .project-arrow {
+  .project-view-arrow {
     transition: none;
   }
 }
